@@ -9,6 +9,9 @@
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 <a href="/" class="text-decoration-none text-dark"><i
                         class="bi bi-house-check-fill me-2"></i>Home</a>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="/tasks" class="text-decoration-none text-dark"><i class="bi bi-list-task me-2"></i>Task</a>
                 <span class="badge text-bg-primary rounded-pill">14</span>
             </li>
         </ul>

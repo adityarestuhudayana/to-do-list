@@ -1,4 +1,4 @@
-<nav class="navbar bg-body-tertiary mb-3">
+<nav class="navbar bg-body-tertiary">
     <div class="container">
         <button class="btn btn-danger" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
             aria-controls="offcanvasWithBothOptions"><i class="bi bi-list"></i></button>
