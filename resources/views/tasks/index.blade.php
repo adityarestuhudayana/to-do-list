@@ -1,7 +1,9 @@
 @extends('template.main')
 
 @section('container')
-    <h1 class="my-5">Tasks</h1>
+    <h1 class="mt-3">Tasks</h1>
+
+    <button type="button" class="btn btn-outline-primary my-2"><i class="bi bi-file-earmark-plus-fill me-1"></i>Baru</button>
 
     <table class="table">
         <thead>
