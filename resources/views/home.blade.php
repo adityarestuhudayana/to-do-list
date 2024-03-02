@@ -17,4 +17,7 @@
             </div>
         </div>
     </div>
+    {{-- Footer --}}
+    @include('template.footer')
 @endsection
+
