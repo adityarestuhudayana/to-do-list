@@ -12,7 +12,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('tasks.index');
+        return view('tasks.index', [
+            'tasks' => Task::latest()->get()
+        ]);
     }
 
     /**
@@ -67,6 +69,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        Task::destroy($task->id);
+
+        return redirect('/tasks')->with('deleteNoteSuccess', 'Hapus catatan Berhasil');
     }
 }

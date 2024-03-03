@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('catatan');
-            $table->integer('jumlah')->nullable();
+            $table->integer('jumlah')->default(0);
             $table->timestamps();
         });
     }

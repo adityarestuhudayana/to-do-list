@@ -3,6 +3,20 @@
 @section('container')
     <h1 class="mt-3">Tasks</h1>
 
+    @if (session('addNoteSuccess'))
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{ session('addNoteSuccess') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    @if (session('deleteNoteSuccess'))
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            {{ session('deleteNoteSuccess') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <button type="button" class="btn btn-outline-primary my-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
             class="bi bi-file-earmark-plus-fill me-1"></i>Baru</button>
 
@@ -16,25 +30,36 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                    </div>
-                </td>
-                <td>Bawang</td>
-                <td>0</td>
-                <td>
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="bi bi-three-dots-vertical"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-trash-fill me-1"></i>Delete</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-pen-fill me-1"></i>Edit</a></li>
-                    </ul>
-                </td>
-            </tr>
+            @foreach ($tasks as $task)
+                <tr>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+                                checked>
+                        </div>
+                    </td>
+                    <td>{{ $task->catatan }}</td>
+                    <td>{{ $task->jumlah }}</td>
+                    <td>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <form action="/tasks/{{ $task->id }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="dropdown-item" type="submit">
+                                        <i class="bi bi-trash-fill me-1"></i>Delete
+                                    </button>
+                                </form>
+                            </li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-pen-fill me-1"></i>Edit</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 
@@ -54,14 +79,15 @@
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="exampleInputCatatan1" class="form-label">Catatan</label>
+                            <label for="exampleInputCatatan1"
+                                class="form-label @error('catatan') is-invalid @enderror">Catatan</label>
                             <input type="text" class="form-control" id="exampleInputCatatan1" name="catatan"
-                                placeholder="Catatan hari ini" autocomplete="off">
+                                placeholder="Catatan hari ini" autocomplete="off" required>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputCatatan1" class="form-label">Jumlah</label>
                             <input type="number" class="form-control" id="exampleInputCatatan1" name="jumlah"
-                                placeholder="Jumlah ( Opsional )" autocomplete="off">
+                                placeholder="Jumlah ( Opsional )" autocomplete="off" value="0">
                         </div>
                     </div>
                     <div class="modal-footer">
